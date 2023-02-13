@@ -2,6 +2,9 @@
 
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from firstgraph import first_graph
+from secondgraph import second_graph
+from thirdgraph import third_graph
 
 
 def browse_for_data(url):
@@ -58,6 +61,15 @@ def retrieve_data_from_table(b_soup, table_id, table_class, tr_class):
     return data
 
 
+def display_menu():
+    print("Bienvenu sur EDR CVE Ranking! Choisissez le diagramme souhaité: \n")
+    print("1. ")
+    print("2. ")
+    print("3. ")
+    print("4. Quit!")
+    return int(input())
+
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     urls = ["https://www.cvedetails.com/vulnerability-list/vendor_id-76/product_id-34197/year-2017/"
@@ -80,3 +92,18 @@ if __name__ == '__main__':
         vuln_dict[retrieve_product_name(soup)] = data
 
     print(vuln_dict)
+    keep_going = True
+    while keep_going:
+        choix = display_menu()
+
+        if choix == 1:
+            first_graph(vuln_dict)
+        elif choix == 2:
+            second_graph(vuln_dict)
+        elif choix == 3:
+            third_graph(vuln_dict)
+        elif choix == 4:
+            keep_going = False
+        else:
+            print("Wrong Choice!")
+
