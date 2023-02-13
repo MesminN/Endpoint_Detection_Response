@@ -3,7 +3,7 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from firstgraph import gravite_moyenne_par_solution
-from secondgraph import second_graph
+from secondgraph import jours_moyen_patch_par_solution
 from thirdgraph import nombre_cve_par_solution
 
 
@@ -99,7 +99,7 @@ if __name__ == '__main__':
         if choix == 1:
             gravite_moyenne_par_solution(vuln_dict)
         elif choix == 2:
-            second_graph(vuln_dict)
+            jours_moyen_patch_par_solution(vuln_dict)
         elif choix == 3:
             nombre_cve_par_solution(vuln_dict)
         elif choix == 4:
