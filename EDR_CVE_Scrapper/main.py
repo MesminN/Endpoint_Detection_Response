@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from firstgraph import gravite_moyenne_par_solution
 from secondgraph import second_graph
-from thirdgraph import third_graph
+from thirdgraph import nombre_moyen_par_solution
 
 
 def browse_for_data(url):
@@ -101,7 +101,7 @@ if __name__ == '__main__':
         elif choix == 2:
             second_graph(vuln_dict)
         elif choix == 3:
-            third_graph(vuln_dict)
+            nombre_moyen_par_solution(vuln_dict)
         elif choix == 4:
             keep_going = False
         else:
