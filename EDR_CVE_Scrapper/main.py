@@ -1,9 +1,9 @@
 # This is a sample Python script.
-
+import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from edr_cve_graphs import gravite_moyenne_par_solution, jours_moyens_patch_par_solution, nombre_cves_par_solution
-from ranking import get_rank_dictionary, display_ranking
+from ranking import get_rank_dictionary, display_ranking, plot_ranking
 
 
 def browse_for_data(url):
@@ -82,8 +82,14 @@ if __name__ == '__main__':
 
     vuln_dict = {}
 
-    for url in urls:
-        html_content = browse_for_data(url)
+    for index, url in enumerate(urls):
+        html_content = ""
+        if index <= 1:
+            html_content = browse_for_data(url)
+        else:
+            response = requests.get(url)
+            if response.status_code == 200:
+                html_content = response.text
 
         soup = BeautifulSoup(html_content, 'html.parser')
 
@@ -103,9 +109,10 @@ if __name__ == '__main__':
         elif choix == 3:
             nombre_cves_par_solution(vuln_dict)
         elif choix == 4:
-            display_ranking(get_rank_dictionary(vuln_dict))
+            ranking_data = get_rank_dictionary(vuln_dict)
+            display_ranking(ranking_data)
+            plot_ranking(ranking_data)
         elif choix == 5:
             keep_going = False
         else:
             print("Wrong Choice!")
-

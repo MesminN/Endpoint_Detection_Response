@@ -1,5 +1,5 @@
 from edr_cve_graphs \
-    import get_gravite_moyenne_par_solution, get_jours_moyens_path_par_solution, get_nombre_cves_par_solution
+    import plot, get_gravite_moyenne_par_solution, get_jours_moyens_path_par_solution, get_nombre_cves_par_solution
 
 
 def get_nb_min_cves(data):
@@ -67,7 +67,15 @@ def get_rank_dictionary(data):
 
 
 def display_ranking(data):
+    print("Ranking:")
     solutions = list(data.keys())
     grades = list(data.values())
     for index, grade in enumerate(grades):
         print(str(index) + " - " + solutions[index] + ": " + str(grade))
+    print()
+
+
+def plot_ranking(data):
+    solutions = list(data.keys())
+    grades = list(data.values())
+    plot(data, solutions, grades, "Solution EDR", "Note de la solution sur 10")
