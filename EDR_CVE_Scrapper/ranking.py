@@ -70,4 +70,4 @@ def display_ranking(data):
     solutions = list(data.keys())
     grades = list(data.values())
     for index, grade in enumerate(grades):
-        print(solutions[index] + ": " + str(grade))
+        print(str(index) + " - " + solutions[index] + ": " + str(grade))
