@@ -2,7 +2,7 @@
 
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from firstgraph import first_graph
+from firstgraph import gravite_moyenne_par_solution
 from secondgraph import second_graph
 from thirdgraph import third_graph
 
@@ -97,7 +97,7 @@ if __name__ == '__main__':
         choix = display_menu()
 
         if choix == 1:
-            first_graph(vuln_dict)
+            gravite_moyenne_par_solution(vuln_dict)
         elif choix == 2:
             second_graph(vuln_dict)
         elif choix == 3:
