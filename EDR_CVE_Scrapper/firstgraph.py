@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import matplotlib.cm as cm
 
 
 def gravite_moyenne_par_solution(data):
@@ -12,9 +13,15 @@ def gravite_moyenne_par_solution(data):
         sum = 0
         for line in matrix:
             mean += float(line[5])
-            sum +=1
+            sum += 1
         mean /= sum
         cves.append(mean)
-    plt.bar(range(len(data)), cves)
-    plt.legend(names)
+
+    cmap = cm.get_cmap('viridis', len(cves))
+    for i, (name, cve) in enumerate(zip(names, cves)):
+        plt.bar(i, cve, color=cmap(i), label=name)
+    plt.xticks(range(len(data)))
+    plt.xlabel("Solution")
+    plt.ylabel("Gravité Moyenne")
+    plt.legend()
     plt.show()
