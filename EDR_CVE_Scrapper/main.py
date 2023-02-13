@@ -2,9 +2,9 @@
 
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from firstgraph import gravite_moyenne_par_solution
-from secondgraph import jours_moyen_patch_par_solution
-from thirdgraph import nombre_cve_par_solution
+from edr_cve_graphs import gravite_moyenne_par_solution
+from edr_cve_graphs import jours_moyen_patch_par_solution
+from edr_cve_graphs import nombre_cve_par_solution
 
 
 def browse_for_data(url):
@@ -63,9 +63,9 @@ def retrieve_data_from_table(b_soup, table_id, table_class, tr_class):
 
 def display_menu():
     print("Bienvenu sur EDR CVE Ranking! Choisissez le diagramme souhaité: \n")
-    print("1. ")
-    print("2. ")
-    print("3. ")
+    print("1. Gravité moyenne par solution")
+    print("2. Nombre de jours moyens avant patch par solution")
+    print("3. Nombre de CVE par solution")
     print("4. Quit!")
     return int(input())
 
