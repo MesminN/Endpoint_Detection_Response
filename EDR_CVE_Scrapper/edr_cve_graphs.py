@@ -14,31 +14,38 @@ def plot(data, names, cves, x_label_title, y_label_title):
     plt.show()
 
 
-def gravite_moyenne_par_solution(data):
-    print("Gravité moyenne par solution")
+def get_gravite_moyenne_par_solution(data):
+    result = {}
     names = list(data.keys())
     all_values = list(data.values())
 
-    cves = []
-    for matrix in all_values:
+    for index, matrix in enumerate(all_values):
         mean = 0.0
         sum = 0
         for line in matrix:
             mean += float(line[5])
             sum += 1
         mean /= sum
-        cves.append(mean)
+        result[names[index]] = mean
 
-    plot(data, names, cves, "Solution", "Gravité Moyenne")
+    return result
 
 
-def jours_moyen_patch_par_solution(data):
-    print("Nombre de jours moyens avant patch par solution")
+def gravite_moyenne_par_solution(data):
+    print("Gravité moyenne par solution")
+    tab = get_gravite_moyenne_par_solution(data)
+    names = list(tab.keys())
+    cves = list(tab.values())
+
+    plot(tab, names, cves, "Solution", "Gravité Moyenne")
+
+
+def get_jours_moyens_path_par_solution(data):
+    result = {}
     names = list(data.keys())
     all_values = list(data.values())
 
-    cves = []
-    for matrix in all_values:
+    for index, matrix in enumerate(all_values):
         mean = 0.0
         sum = 0
         for line in matrix:
@@ -46,20 +53,38 @@ def jours_moyen_patch_par_solution(data):
             resolved_date = datetime.strptime(line[4], "%Y-%m-%d")
             delta = resolved_date - detection_date
             mean += delta.days
-            sum +=1
+            sum += 1
         mean /= sum
-        cves.append(mean)
+        result[names[index]] = mean
 
-    plot(data, names, cves, "Solution", "Nombre de jours moyen avant patch")
+    return result
 
 
-def nombre_cve_par_solution(data):
-    print("Nombre de CVE par solution")
+def jours_moyens_patch_par_solution(data):
+    print("Nombre de jours moyens avant patch par solution")
+    tab = get_jours_moyens_path_par_solution(data)
+    names = list(tab.keys())
+    cves = list(tab.values())
+
+    plot(tab, names, cves, "Solution", "Nombre de jours moyen avant patch")
+
+
+def get_nombre_cves_par_solution(data):
+    result = {}
     names = list(data.keys())
     all_values = list(data.values())
 
-    cves = []
-    for matrix in all_values:
-        cves.append(len(matrix))
+    for index, matrix in enumerate(all_values):
+        nb_cves = len(matrix)
+        result[names[index]] = nb_cves
 
-    plot(data, names, cves, "Solution", "Nombre CVE")
+    return result
+
+
+def nombre_cves_par_solution(data):
+    print("Nombre de CVE par solution")
+    tab = get_nombre_cves_par_solution(data)
+    names = list(tab.keys())
+    cves = list(tab.values())
+
+    plot(tab, names, cves, "Solution", "Nombre CVE")

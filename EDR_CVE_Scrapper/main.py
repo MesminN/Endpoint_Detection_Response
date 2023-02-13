@@ -2,9 +2,8 @@
 
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from edr_cve_graphs import gravite_moyenne_par_solution
-from edr_cve_graphs import jours_moyen_patch_par_solution
-from edr_cve_graphs import nombre_cve_par_solution
+from edr_cve_graphs import gravite_moyenne_par_solution, jours_moyens_patch_par_solution, nombre_cves_par_solution
+from ranking import get_rank_dictionary, display_ranking
 
 
 def browse_for_data(url):
@@ -66,7 +65,8 @@ def display_menu():
     print("1. Gravité moyenne par solution")
     print("2. Nombre de jours moyens avant patch par solution")
     print("3. Nombre de CVE par solution")
-    print("4. Quit!")
+    print("4. Rank solutions")
+    print("5. Quit!")
     return int(input())
 
 
@@ -99,10 +99,12 @@ if __name__ == '__main__':
         if choix == 1:
             gravite_moyenne_par_solution(vuln_dict)
         elif choix == 2:
-            jours_moyen_patch_par_solution(vuln_dict)
+            jours_moyens_patch_par_solution(vuln_dict)
         elif choix == 3:
-            nombre_cve_par_solution(vuln_dict)
+            nombre_cves_par_solution(vuln_dict)
         elif choix == 4:
+            display_ranking(get_rank_dictionary(vuln_dict))
+        elif choix == 5:
             keep_going = False
         else:
             print("Wrong Choice!")
